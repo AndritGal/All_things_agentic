@@ -11,7 +11,7 @@ class ChatModule:
 
     def __init__(self):
 
-        self.client = GroqProvider()
+        self.llm = GroqProvider()
 
         self.conversation = [
             {
@@ -33,12 +33,9 @@ class ChatModule:
             }
         )
 
-        response = self.client.chat.completions.create(
-            model=self.model,
-            messages=self.conversation
-        )
-
-        assistant_message = response.choices[0].message.content
+        assistant_message = self.llm.generate_response(
+    self.conversation
+)
 
         self.conversation.append(
             {
